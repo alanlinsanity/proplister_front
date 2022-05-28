@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -17,7 +18,7 @@ const Register = () => {
 
   async function register(event) {
     event.preventDefault();
-    if (password === cpassword) {
+    if ((password === cpassword) && (name && email && contact !== "" )) {
       const user = {
         name,
         email,
@@ -29,16 +30,18 @@ const Register = () => {
       try {
         const result = await axios.post("/api/users/register", user).data;
         alert("User Created Successfully");
-        // setName("");
-        // setEmail("");
-        // setContact("");
-        // setPassword("");
-        // setCpassword("");
+        setName("");
+        setEmail("");
+        setContact("");
+        setPassword("");
+        setCpassword("");
       } catch (error) {
         console.log(error);
         setError(true);
       }
       console.log(user);
+    } else if (password === cpassword) {
+      alert("Please check that all fields have been filled");
     } else {
       alert("Passwords do not match");
     }

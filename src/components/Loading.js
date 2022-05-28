@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Loading = () => {
+const Alert = () => {
   return (
     <div>Loading</div>
   )
