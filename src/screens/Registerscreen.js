@@ -9,6 +9,8 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [cpassword, setCpassword] = useState("");
   const [passwordShown, setPasswordShown] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [incomplete, setIncomplete] = useState(false);
 
   const [error, setError] = useState(false);
 
@@ -19,6 +21,7 @@ const Register = () => {
   async function register(event) {
     event.preventDefault();
     if ((password === cpassword) && (name && email && contact !== "" )) {
+      setIncomplete(false)
       const user = {
         name,
         email,
@@ -29,7 +32,7 @@ const Register = () => {
 
       try {
         const result = await axios.post("/api/users/register", user).data;
-        alert("User Created Successfully");
+        setSuccess(true)
         setName("");
         setEmail("");
         setContact("");
@@ -41,7 +44,7 @@ const Register = () => {
       }
       console.log(user);
     } else if (password === cpassword) {
-      alert("Please check that all fields have been filled");
+      setIncomplete(true)
     } else {
       alert("Passwords do not match");
     }
@@ -51,6 +54,9 @@ const Register = () => {
     <div>
       <div className="row justify-content-center mt-5">
         <div className="col-md-5 mt-5">
+        {success && <div className=" alert alert-success" role="alert">User Registered Successfully</div>}
+        {incomplete && <div className=" alert alert-danger" role="alert">Please Ensure All Fields Have Been Filled</div>}
+
           <div className="bs">
             <h1>
               Register

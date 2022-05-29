@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Button, Carousel } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Listing = ({ listing }) => {
   const [show, setShow] = useState(false);
@@ -7,7 +8,7 @@ const Listing = ({ listing }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const whatsappLink = `https://api.whatsapp.com/send?phone=65${listing.contact}&text=I%20am%20keen%20on%20your%20listing%20at%20${listing.property}.%20Please%20contact%20me!`
+  const whatsappLink = `https://api.whatsapp.com/send?phone=65${listing.contact}&text=I%20am%20keen%20on%20your%20listing%20at%20${listing.property}.%20Please%20contact%20me!`;
 
   return (
     <div className="row bs">
@@ -48,8 +49,8 @@ const Listing = ({ listing }) => {
           </Carousel>
           <br />
           <p>
-            {listing.rentalType} <br/>
-            Type: {listing.propertyType} <br/>
+            {listing.rentalType} <br />
+            Type: {listing.propertyType} <br />
             {listing.noOfBedrooms} bed {listing.noOfBathrooms} bath <br />
             Size: {listing.size} sqft
             <br />
@@ -61,17 +62,20 @@ const Listing = ({ listing }) => {
         </Modal.Body>
 
         <Modal.Footer>
-          <a href={whatsappLink}>
-            <Button
-              class="btn btn-success"
-            >
-              WhatsApp
+          <Link
+            to={`/listings/${listing._id}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button className="btn btn-success">
+              <span>View Listing</span>
             </Button>
+          </Link>
+
+          <a href={whatsappLink}>
+            <Button class="btn btn-success">WhatsApp</Button>
           </a>
 
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
         </Modal.Footer>
       </Modal>
     </div>
