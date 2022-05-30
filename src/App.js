@@ -5,6 +5,7 @@ import Homescreen from './screens/Homescreen';
 import Registerscreen from './screens/Registerscreen';
 import Loginscreen from './screens/Loginscreen';
 import ListingIndiv from './screens/Listingscreen';
+import Createscreen from './screens/Createscreen';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='listings' element={<Homescreen />}/>
+          <Route path='create' element={<Createscreen />}/>
           <Route path='/listings/:id' element={<ListingIndiv/>}/>
           <Route path='register' element={<Registerscreen />}/>
           <Route path='login' element={<Loginscreen />}/>

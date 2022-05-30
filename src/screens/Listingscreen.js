@@ -35,72 +35,77 @@ const ListingIndiv = (listingId) => {
   }, []);
 
   return (
-    <div className="container">
-      <div>
-        <br />
-        <h1>
-          <b>
-            {selectedListing.property} ({selectedListing.postal})
-          </b>
-        </h1>
-        <br />
-      </div>
-      <Carousel>
-        {selectedListing.images?.map((url) => {
-          return (
-            <Carousel.Item>
-              <img className="d-block w-100 h-50 bigimg" src={url} />
-            </Carousel.Item>
-          );
-        })}
-      </Carousel>
-      {/* {selectedListing.images[0]}<br/><br/>
+    <div className="indivListing">
+      <div className="container">
+        <div>
+          <br />
+          <h1>
+            <b>
+              {selectedListing.property} ({selectedListing.postal})
+            </b>
+          </h1>
+          <br />
+        </div>
+        <Carousel>
+          {selectedListing.images?.map((url) => {
+            return (
+              <Carousel.Item>
+                <img className="d-block w-100 h-50 bigimg" src={url} />
+              </Carousel.Item>
+            );
+          })}
+        </Carousel>
+        {/* {selectedListing.images[0]}<br/><br/>
         {selectedListing.images[1]}<br/><br/>
         {selectedListing.images[2]}<br/><br/> */}
-      <br />
-      <div className="row justify-content-center mt-5 mb-5">
-
-      <h4>
-      <u><b>Unit Details</b></u> <br />
         <br />
-
-        District: {selectedListing.district}
-        <br />
-        <br />
-        Property Type: {selectedListing.propertyType}
-        <br />
-        <br />
-        Rental Type: {selectedListing.rentalType}
-        <br />
-        <br />
-        {selectedListing.noOfBedrooms} bedrooms
-        <br />
-        <br />
-        {selectedListing.noOfBathrooms} bathrooms
-        <br />
-        <br />
-        Size: {selectedListing.size} sqft
-        <br />
-        <br />
-        Asking Price: ${selectedListing.price}
-        <br />
-        <br />
-        <br />
-        <u><b>Unit Description</b></u> <br />
-        <br />
-        {selectedListing.description}
-        <br />
-        <br />
-        Lister: {selectedListing.lister}
-        <br />
-        <br />
-        Contact Number: +65 {selectedListing.contact}
-      </h4>
+        <div className="row justify-content-center mt-5 mb-5">
+          <h4>
+            <u>
+              <b>Unit Details</b>
+            </u>{" "}
+            <br />
+            <br />
+            District: {selectedListing.district}
+            <br />
+            <br />
+            Property Type: {selectedListing.propertyType}
+            <br />
+            <br />
+            Rental Type: {selectedListing.rentalType}
+            <br />
+            <br />
+            {selectedListing.noOfBedrooms} bedrooms
+            <br />
+            <br />
+            {selectedListing.noOfBathrooms} bathrooms
+            <br />
+            <br />
+            Size: {selectedListing.size} sqft
+            <br />
+            <br />
+            Asking Price: ${selectedListing.price}
+            <br />
+            <br />
+            <br />
+            <u>
+              <b>Unit Description</b>
+            </u>{" "}
+            <br />
+            <br />
+            {selectedListing.description}
+            <br />
+            <br />
+            Lister: {selectedListing.lister}
+            <br />
+            <br />
+            Contact Number: +65 {selectedListing.contact}
+          </h4>
+        </div>
+        <a href={whatsappLink}>
+          <Button class="btn btn-success">WhatsApp</Button>
+        </a>
       </div>
-      <a href={whatsappLink}>
-        <Button class="btn btn-success">WhatsApp</Button>
-      </a>
-      
     </div>
   );
 };
