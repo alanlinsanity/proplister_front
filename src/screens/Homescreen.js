@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 // import urlcat from "urlcat";
 import axios from "axios";
 import Listing from "../components/Listing";
+import Carousel from "../components/Banner";
 
 const Homescreen = () => {
   const BACKEND = "http://localhost:5000";
@@ -29,6 +30,7 @@ const Homescreen = () => {
 
   return (
     <div className="container">
+      <Carousel />
       <div className="row justify-content-center mt-5 mb-5">
         {loading ? (
           <h1>Loading...</h1>
