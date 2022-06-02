@@ -53,16 +53,6 @@ const Search = (props) => {
     setSearchValue_Bathrooms("Any");
     console.log("reset")
     
-
-    // const resetParams = {
-    //   searchValue_min,
-    //   searchValue_max,
-    //   searchValue_HDBorPrivate,
-    //   searchValue_Rooms,
-    //   searchValue_Bathrooms,
-    // };
-    // createSearch(resetParams);
-    // // alert('Search created');
   };
 
   const callSearchFunction = (event) => {
@@ -120,7 +110,7 @@ const Search = (props) => {
             >
               <option value="Any">Any</option>
               <option value="HDB">HDB</option>
-              <option value="Private">Private</option>
+              <option value="Private Property">Private Property</option>
             </select>{" "}
             
             <label>Bedrooms</label> 
@@ -156,7 +146,7 @@ const Search = (props) => {
               <option value="4">4 Bathroom</option>
               <option value="More than 4 rooms">More than 4 Bathroom</option>
             </select>
-
+              <br/>
             <button
               className="btn btn-primary"
               onClick={resetFilters}

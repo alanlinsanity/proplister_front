@@ -35,8 +35,10 @@ const ListingIndiv = (listingId) => {
   }, []);
 
   return (
+      
     <div className="indivListing">
       <div className="container">
+        
         <div>
           <br />
           <h1>
