@@ -6,6 +6,8 @@ import Registerscreen from './screens/Registerscreen';
 import Loginscreen from './screens/Loginscreen';
 import ListingIndiv from './screens/Listingscreen';
 import Createscreen from './screens/Createscreen';
+import Dashboard from './screens/Dashboard';
+import Edit from './screens/Edit';
 
 function App() {
   return (
@@ -14,8 +16,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='listings' element={<Homescreen />}/>
+          <Route path='dashboard' element={<Dashboard />}/>
+
           <Route path='create' element={<Createscreen />}/>
-          <Route path='/listings/:id' element={<ListingIndiv/>}/>
+          <Route path='/listings/:id' exact element={<ListingIndiv/>}/>
+          <Route path='/listings/edit/:id' element={<Edit />}/>
           <Route path='register' element={<Registerscreen />}/>
           <Route path='login' element={<Loginscreen />}/>
          

@@ -1,14 +1,34 @@
 import React, { useState } from "react";
 import { Modal, Button, Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import urlcat from "urlcat";
 
-const Listing = ({ listing }) => {
+
+const BACKEND = "http://localhost:5000";
+
+
+const ListingDashboard = ({ listing }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const whatsappLink = `https://api.whatsapp.com/send?phone=65${listing.contact}&text=I%20am%20keen%20on%20your%20listing%20at%20${listing.property}.%20Please%20contact%20me!`;
+  // const handleDelete = (id) => () => {
+  //   const url = urlcat(BACKEND, `/api/listings/delete/${id}`);
+  //   await fetch(url, { method: "DELETE" })
+  //     .then((response) => response.json())
+  //     .then((data) => console.log(data));
+  // };
+
+  const handleDelete = (id) => () => {
+    const url = urlcat(BACKEND, `/api/listings/${id}`);
+    fetch(url, { method: "DELETE" })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  };
+
+
+  // const whatsappLink = `https://api.whatsapp.com/send?phone=65${listing.contact}&text=I%20am%20keen%20on%20your%20listing%20at%20${listing.property}.%20Please%20contact%20me!`;
 
   return (
     <div className="row bs">
@@ -16,9 +36,9 @@ const Listing = ({ listing }) => {
         <img src={listing.images[0]} className="smallimg" />
       </div>
       <div className="col-md-7 mt-0">
-        <h4><b>
+        <h4>
           {listing.property} ({listing.propertyType})
-          </b> </h4>
+        </h4>
         <b>
           <p>{listing.rentalType}</p>
           <p>
@@ -28,10 +48,11 @@ const Listing = ({ listing }) => {
           <p>Asking Rent: ${listing.price} per month</p>
         </b>
         <Button variant="primary" onClick={handleShow}>
-        Learn More
+        View Details
       </Button>
       </div>
      
+   
 
       <Modal show={show} onHide={handleClose} size="md">
         <Modal.Header closeButton>
@@ -72,9 +93,19 @@ const Listing = ({ listing }) => {
             </Button>
           </Link>
 
-          <a href={whatsappLink}>
-            <Button class="btn btn-success">WhatsApp</Button>
-          </a>
+          <Link
+            to={`/listings/edit/${listing._id}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button className="btn btn-success">
+              <span>Edit Listing</span>
+            </Button>
+          </Link>
+
+          <Button variant="primary" class="btn-danger" onClick={handleDelete(listing._id)}>
+            Delete
+          </Button>
 
         </Modal.Footer>
       </Modal>
@@ -82,4 +113,4 @@ const Listing = ({ listing }) => {
   );
 };
 
-export default Listing;
+export default ListingDashboard;

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 // import urlcat from "urlcat";
 import axios from "axios";
-import Listing from "../components/Listing";
+import ListingDashboard from "../components/ListingDashboard";
 import Carousel from "../components/Banner";
-import Search from "../components/Searchbar";
 
-const Homescreen = () => {
+const Dashboard = () => {
   const BACKEND = "http://localhost:5000";
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState();
@@ -29,29 +28,18 @@ const Homescreen = () => {
     loadListings();
   }, []);
 
-  const handleList = (retrievedList) => {
-		setListings(retrievedList);
-		console.log(retrievedList);
-	};
-
   return (
     <div className="container">
       <Carousel />
-      <Search handleList={handleList} />
-      <br/>
-      <div className="row justify-content-center">
-      Displaying a total of "<b>{listings.length} listings</b>" based on the
-				filter(s) you have selected.
-			</div>
       <div className="row justify-content-center mt-5 mb-5">
         {loading ? (
           <h1>Loading...</h1>
         ) : error ? (
           <h1>Unable to fetch listings</h1>
-        ) : ( 
+        ) : (
           listings.map((listing) => {
             return <div className="col-md-9 mt-5">
-              <Listing listing={listing} />
+              <ListingDashboard listing={listing} />
             </div>;
           })
         )}
@@ -60,4 +48,4 @@ const Homescreen = () => {
   );
 };
 
-export default Homescreen;
+export default Dashboard;

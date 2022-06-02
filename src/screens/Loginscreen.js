@@ -5,6 +5,9 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordShown, setPasswordShown] = useState(false);
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
+
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
@@ -16,9 +19,16 @@ const Login = () => {
       password,
     };
     try {
-      const result = await axios.post("/api/users/login", user).data;
+      setError(false)
+      const result = (await axios.post("/api/users/login", user)).data;
+      setSuccess(true)
+      localStorage.setItem("currentUser", JSON.stringify(result))
+      window.location.href='/listings'
+
     } catch (error) {
       console.log(error);
+      setSuccess(false)
+      setError(true)
     }
     console.log(user);
   }
@@ -27,6 +37,9 @@ const Login = () => {
     <div>
       <div className="row justify-content-center mt-5">
         <div className="col-md-5 mt-5">
+        {success && <div className=" alert alert-success" role="alert">Login Successful</div>}
+        {error && <div className=" alert alert-danger" role="alert">Invalid Credentials</div>}
+
           <div className="bs">
             <h1>
               Login

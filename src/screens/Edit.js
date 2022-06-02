@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import { useParams } from "react-router-dom";
 
 // database for district based on prefix
 const districts = [
@@ -146,6 +146,9 @@ const districts = [
   },
 ];
 
+const BACKEND = "http://localhost:5000";
+
+
 function districtLookupBy(postal) {
   if (postal.length === 6) {
     const postal_prefix = postal.slice(0, 2);
@@ -158,10 +161,13 @@ function districtLookupBy(postal) {
   }
 }
 
-const Create = () => {
-    const user = JSON.parse(localStorage.getItem("currentUser"));
+const Edit = () => {
+  const [selectedListing, setSelectedListing] = useState([]);
+  const [loading, setLoading] = useState();
 
+  const { id } = useParams();
 
+  const [_id, set_Id] = useState("");
   const [rentalType, setRentalType] = useState("");
   const [property, setProperty] = useState("");
   const [postal, setPostal] = useState("");
@@ -172,7 +178,7 @@ const Create = () => {
   const [noOfBedrooms, setNoOfBedrooms] = useState("");
   const [noOfBathrooms, setNoOfBathrooms] = useState("");
   const [description, setDescription] = useState("");
-  const [lister, setLister] = useState();
+  const [lister, setLister] = useState("");
   const [contact, setContact] = useState("");
   const [image1, setImage1] = useState("");
   const [image2, setImage2] = useState("");
@@ -182,6 +188,43 @@ const Create = () => {
   const [incomplete, setIncomplete] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+
+  async function loadListing() {
+    try {
+      setLoading(true);
+      const listing = await axios(`${BACKEND}/api/listings/${id}`);
+      setSelectedListing(listing.data);
+      console.log("selected", selectedListing);
+
+      set_Id(selectedListing._id)
+      setRentalType(selectedListing.rentalType);
+      setProperty(selectedListing.property);
+      setPostal(selectedListing.postal);
+      setDistrict(selectedListing.district);
+      setPropertyType(selectedListing.propertyType);
+      setPrice(selectedListing.price);
+      setSize(selectedListing.size);
+      setNoOfBedrooms(selectedListing.noOfBedrooms);
+      setNoOfBathrooms(selectedListing.noOfBathrooms);
+      setDescription(selectedListing.description);
+      setLister(selectedListing.lister);
+      setContact(selectedListing.contact);
+      setImage1(selectedListing.images[0]);
+      setImage2(selectedListing.images[1]);
+      setImage3(selectedListing.images[2]);
+      setImages(selectedListing.images);
+
+    } catch (e) {
+      setError(e);
+      console.log(error);
+    } finally {
+      setLoading(false);
+      console.log(loading);
+    }
+  }
+  useEffect(() => {
+    loadListing();
+  }, [postal]);
 
   function clearFields() {
     setRentalType("");
@@ -200,6 +243,7 @@ const Create = () => {
     setImage2("");
     setImage3("");
     setImages([]);
+    setSuccess(false);
     setIncomplete(false);
   }
 
@@ -209,7 +253,7 @@ const Create = () => {
     setDistrict(districtLookupBy(postalCode));
   };
 
-  async function create(event) {
+  async function edit(event) {
     event.preventDefault();
     if (
       rentalType &&
@@ -227,6 +271,7 @@ const Create = () => {
     ) {
       setIncomplete(false);
       const listing = {
+        _id,
         rentalType,
         property,
         postal,
@@ -239,13 +284,13 @@ const Create = () => {
         description,
         lister,
         contact,
-        images:[image1, image2, image3]
+        images: [image1, image2, image3],
       };
 
       try {
-        const result = await axios.post("/api/listings/create", listing).data;
+        const result = await axios.put("/api/listings/edit", listing).data;
         setSuccess(true);
-        console.log(result.images)
+        console.log(result.images);
         setRentalType("");
         setProperty("");
         setPostal("");
@@ -279,18 +324,18 @@ const Create = () => {
         <div className="col-md-5 mt-5">
           {success && (
             <div className=" alert alert-success" role="alert">
-              Listing Created Successfully
+              Listing Edited Successfully
             </div>
           )}
           {incomplete && (
             <div className=" alert alert-danger" role="alert">
               Please Ensure All Fields Have Been Filled
-            </div>
+            </div> 
           )}
 
           <div className="bs">
-            <h1>Create Listing</h1>
-            <form >
+            <h1>Edit Listing</h1>
+            <form>
               <select
                 required
                 type="rentalType"
@@ -300,7 +345,7 @@ const Create = () => {
                   setRentalType(e.target.value);
                 }}
               >
-                <option defaultValue="Whole Unit">
+                <option defaultValue="">
                   Please Select A Rental Type
                 </option>
                 <option value="Whole Unit">Whole Unit</option>
@@ -311,6 +356,8 @@ const Create = () => {
                   Room Rental (Common)
                 </option>
               </select>
+
+              
               <select
                 required
                 type="propertyType"
@@ -320,11 +367,11 @@ const Create = () => {
                   setPropertyType(e.target.value);
                 }}
               >
-                <option defaultValue="Unknown">
+                <option defaultValue="">
                   Please Select A Property Type
                 </option>
                 <option value="HDB">HDB</option>
-                <option value="Private">Private </option>
+                <option value="Private">Private</option>
                 <option value="Co-living">Co-living</option>
               </select>
 
@@ -463,9 +510,9 @@ const Create = () => {
               <button
                 type="submit"
                 className="btn btn-primary"
-                onClick={create}
+                onClick={edit}
               >
-                Register
+                Confirm Edit
               </button>
             </form>
             <button className="btn btn-primary" onClick={clearFields}>
@@ -478,4 +525,4 @@ const Create = () => {
   );
 };
 
-export default Create;
+export default Edit;
