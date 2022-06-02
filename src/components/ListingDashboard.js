@@ -25,6 +25,8 @@ const ListingDashboard = ({ listing }) => {
     fetch(url, { method: "DELETE" })
       .then((response) => response.json())
       .then((data) => console.log(data));
+      alert("listing deleted")
+      window.location.href='/dashboard'
   };
 
 
