@@ -23,7 +23,7 @@ const Login = () => {
       const result = (await axios.post("/api/users/login", user)).data;
       setSuccess(true)
       localStorage.setItem("currentUser", JSON.stringify(result))
-      window.location.href='/listings'
+      window.location.href='/dashboard'
 
     } catch (error) {
       console.log(error);
