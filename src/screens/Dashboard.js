@@ -5,9 +5,8 @@ import ListingDashboard from "../components/ListingDashboard";
 import Carousel from "../components/Banner";
 
 const Dashboard = () => {
-
-    const user = JSON.parse(localStorage.getItem("currentUser"));
-    const contact = user.contact
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+  const contact = user.contact;
 
   const BACKEND = "http://localhost:5000";
   const [listings, setListings] = useState([]);
@@ -15,8 +14,6 @@ const Dashboard = () => {
   const [error, setError] = useState();
 
   async function loadListings() {
-   
-
     try {
       setLoading(true);
       const listings = await axios(`${BACKEND}/api/listings/${contact}`);
@@ -36,22 +33,23 @@ const Dashboard = () => {
 
   return (
     <div className="container">
-        
       <Carousel />
       <div className="row justify-content-center">
-      Welcome to your Dashboard! There are a total of {listings.length} listing(s) found!
-			</div>
+        Welcome to your Dashboard! There are a total of {listings.length}{" "}
+        listing(s) found!
+      </div>
       <div className="row justify-content-center mt-5 mb-5">
-      
         {loading ? (
           <h1>Loading...</h1>
         ) : error ? (
           <h1>Unable to fetch listings</h1>
         ) : (
           listings.map((listing) => {
-            return <div className="col-md-9 mt-5">
-              <ListingDashboard listing={listing} />
-            </div>;
+            return (
+              <div className="col-md-9 mt-5">
+                <ListingDashboard listing={listing} />
+              </div>
+            );
           })
         )}
       </div>

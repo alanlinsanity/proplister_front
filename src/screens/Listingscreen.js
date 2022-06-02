@@ -35,10 +35,8 @@ const ListingIndiv = (listingId) => {
   }, []);
 
   return (
-      
     <div className="indivListing">
       <div className="container">
-        
         <div>
           <br />
           <h1>
@@ -61,7 +59,7 @@ const ListingIndiv = (listingId) => {
         {selectedListing.images[1]}<br/><br/>
         {selectedListing.images[2]}<br/><br/> */}
         <br />
-        <div className="row justify-content-center mt-5 mb-5">
+        <div className="row  mt-5 mb-5">
           <h4>
             <u>
               <b>Unit Details</b>
