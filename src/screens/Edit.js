@@ -148,7 +148,6 @@ const districts = [
 
 const BACKEND = "http://localhost:5000";
 
-
 function districtLookupBy(postal) {
   if (postal.length === 6) {
     const postal_prefix = postal.slice(0, 2);
@@ -192,11 +191,11 @@ const Edit = () => {
   async function loadListing() {
     try {
       setLoading(true);
-      const listing = await axios(`${BACKEND}/api/listings/${id}`);
+      const listing = await axios(`${BACKEND}/api/listings/listing/${id}`);
       setSelectedListing(listing.data);
       console.log("selected", selectedListing);
 
-      set_Id(selectedListing._id)
+      set_Id(selectedListing._id);
       setRentalType(selectedListing.rentalType);
       setProperty(selectedListing.property);
       setPostal(selectedListing.postal);
@@ -213,13 +212,12 @@ const Edit = () => {
       setImage2(selectedListing.images[1]);
       setImage3(selectedListing.images[2]);
       setImages(selectedListing.images);
-
     } catch (e) {
       setError(e);
       console.log(error);
     } finally {
       setLoading(false);
-      console.log(loading);
+      console.log("loading", loading);
     }
   }
   useEffect(() => {
@@ -330,7 +328,7 @@ const Edit = () => {
           {incomplete && (
             <div className=" alert alert-danger" role="alert">
               Please Ensure All Fields Have Been Filled
-            </div> 
+            </div>
           )}
 
           <div className="bs">
@@ -345,9 +343,7 @@ const Edit = () => {
                   setRentalType(e.target.value);
                 }}
               >
-                <option defaultValue="">
-                  Please Select A Rental Type
-                </option>
+                <option defaultValue="">Please Select A Rental Type</option>
                 <option value="Whole Unit">Whole Unit</option>
                 <option value="Room Rental (En-Suite)">
                   Room Rental (En-Suite)
@@ -357,7 +353,6 @@ const Edit = () => {
                 </option>
               </select>
 
-              
               <select
                 required
                 type="propertyType"
@@ -367,12 +362,9 @@ const Edit = () => {
                   setPropertyType(e.target.value);
                 }}
               >
-                <option defaultValue="">
-                  Please Select A Property Type
-                </option>
+                <option defaultValue="">Please Select A Property Type</option>
                 <option value="HDB">HDB</option>
-                <option value="Private">Private</option>
-                <option value="Co-living">Co-living</option>
+                <option value="Private Property">Private Property</option>
               </select>
 
               <input
@@ -507,11 +499,7 @@ const Edit = () => {
                 }}
               />
 
-              <button
-                type="submit"
-                className="btn btn-primary"
-                onClick={edit}
-              >
+              <button type="submit" className="btn btn-primary" onClick={edit}>
                 Confirm Edit
               </button>
             </form>

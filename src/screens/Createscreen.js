@@ -324,8 +324,7 @@ const Create = () => {
                   Please Select A Property Type
                 </option>
                 <option value="HDB">HDB</option>
-                <option value="Private">Private </option>
-                <option value="Co-living">Co-living</option>
+                <option value="Private Property">Private Property</option>
               </select>
 
               <input

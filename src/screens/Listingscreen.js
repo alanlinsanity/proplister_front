@@ -19,7 +19,7 @@ const ListingIndiv = (listingId) => {
   async function loadListing() {
     try {
       setLoading(true);
-      const listing = await axios(`${BACKEND}/api/listings/${id}`);
+      const listing = await axios(`${BACKEND}/api/listings/listing/${id}`);
       setSelectedListing(listing.data);
       console.log("selected", selectedListing);
     } catch (e) {

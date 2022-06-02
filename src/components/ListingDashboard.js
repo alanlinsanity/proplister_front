@@ -13,13 +13,6 @@ const ListingDashboard = ({ listing }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // const handleDelete = (id) => () => {
-  //   const url = urlcat(BACKEND, `/api/listings/delete/${id}`);
-  //   await fetch(url, { method: "DELETE" })
-  //     .then((response) => response.json())
-  //     .then((data) => console.log(data));
-  // };
-
   const handleDelete = (id) => () => {
     const url = urlcat(BACKEND, `/api/listings/${id}`);
     fetch(url, { method: "DELETE" })
