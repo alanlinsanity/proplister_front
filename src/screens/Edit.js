@@ -146,7 +146,7 @@ const districts = [
   },
 ];
 
-const BACKEND = "http://localhost:5000";
+const BACKEND = "https://proplister.herokuapp.com";
 
 function districtLookupBy(postal) {
   if (postal.length === 6) {
@@ -286,7 +286,7 @@ const Edit = () => {
       };
 
       try {
-        const result = await axios.put("/api/listings/edit", listing).data;
+        const result = (await axios.put("https://proplister.herokuapp.com/api/listings/edit", listing)).data;
         setSuccess(true);
         console.log(result.images);
         setRentalType("");

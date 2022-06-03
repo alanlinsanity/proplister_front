@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import urlcat from "urlcat";
 
-const BACKEND = "http://localhost:5000";
+const BACKEND = "https://proplister.herokuapp.com";
 
 const Search = (props) => {
   //   const [searchValue, setSearchValue] = useState("");

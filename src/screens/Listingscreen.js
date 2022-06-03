@@ -19,7 +19,7 @@ const ListingIndiv = (listingId) => {
   async function loadListing() {
     try {
       setLoading(true);
-      const listing = await axios(`${BACKEND}/api/listings/listing/${id}`);
+      const listing = await axios(`${BACKEND}/api/listings/listing${id}`);
       setSelectedListing(listing.data);
       console.log("selected", selectedListing);
     } catch (e) {
@@ -59,7 +59,7 @@ const ListingIndiv = (listingId) => {
         {selectedListing.images[1]}<br/><br/>
         {selectedListing.images[2]}<br/><br/> */}
         <br />
-        <div className="row  mt-5 mb-5">
+        <div className="row justify-content-center mt-5 mb-5">
           <h4>
             <u>
               <b>Unit Details</b>

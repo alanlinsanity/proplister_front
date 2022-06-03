@@ -11,6 +11,7 @@ const Register = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [success, setSuccess] = useState(false);
   const [incomplete, setIncomplete] = useState(false);
+  
 
   const [error, setError] = useState(false);
 
@@ -31,13 +32,15 @@ const Register = () => {
       };
 
       try {
-        const result = await axios.post("/api/users/register", user).data;
+        const result = (await axios.post("https://proplister.herokuapp.com/api/users/register", user)).data;
         setSuccess(true)
         setName("");
         setEmail("");
         setContact("");
         setPassword("");
         setCpassword("");
+        window.location.href='/login'
+
       } catch (error) {
         console.log(error);
         setError(true);

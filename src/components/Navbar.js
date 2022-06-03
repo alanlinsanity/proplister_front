@@ -6,9 +6,10 @@ const Navbar = () => {
     localStorage.removeItem('currentUser');
     window.location.href=`/login`
   }
+  
   return (
     <div>
-      <nav className="navbar navbar-expand-lg">
+      <nav className="navbar fixed-top navbar-expand-lg">
         <a className="navbar-brand" href="/listings">
           PROPLISTER
         </a>

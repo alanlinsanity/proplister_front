@@ -8,7 +8,7 @@ const Dashboard = () => {
   const user = JSON.parse(localStorage.getItem("currentUser"));
   const contact = user.contact;
 
-  const BACKEND = "http://localhost:5000";
+  const BACKEND = "https://proplister.herokuapp.com";
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState();
   const [error, setError] = useState();

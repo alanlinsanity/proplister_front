@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import urlcat from "urlcat";
 
 
-const BACKEND = "http://localhost:5000";
+const BACKEND = "https://proplister.herokuapp.com";
 
 
 const ListingDashboard = ({ listing }) => {

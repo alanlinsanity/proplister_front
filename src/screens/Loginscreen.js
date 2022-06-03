@@ -20,7 +20,7 @@ const Login = () => {
     };
     try {
       setError(false)
-      const result = (await axios.post("/api/users/login", user)).data;
+      const result = (await axios.post("https://proplister.herokuapp.com/api/users/login", user)).data;
       setSuccess(true)
       localStorage.setItem("currentUser", JSON.stringify(result))
       window.location.href='/dashboard'

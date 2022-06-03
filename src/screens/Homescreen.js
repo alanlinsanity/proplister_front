@@ -6,7 +6,7 @@ import Carousel from "../components/Banner";
 import Search from "../components/Searchbar";
 
 const Homescreen = () => {
-  const BACKEND = "http://localhost:5000";
+  const BACKEND = "https://proplister.herokuapp.com";
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState();
   const [error, setError] = useState();

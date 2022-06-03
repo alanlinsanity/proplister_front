@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 
+const user = JSON.parse(localStorage.getItem("currentUser"));
+
 // database for district based on prefix
 const districts = [
   {
@@ -172,8 +174,8 @@ const Create = () => {
   const [noOfBedrooms, setNoOfBedrooms] = useState("");
   const [noOfBathrooms, setNoOfBathrooms] = useState("");
   const [description, setDescription] = useState("");
-  const [lister, setLister] = useState();
-  const [contact, setContact] = useState("");
+  const [lister, setLister] = useState(user.name);
+  const [contact, setContact] = useState(user.contact);
   const [image1, setImage1] = useState("");
   const [image2, setImage2] = useState("");
   const [image3, setImage3] = useState("");
@@ -243,7 +245,7 @@ const Create = () => {
       };
 
       try {
-        const result = await axios.post("/api/listings/create", listing).data;
+        const result = (await axios.post("https://proplister.herokuapp.com/api/listings/create", listing)).data;
         setSuccess(true);
         console.log(result.images)
         setRentalType("");
@@ -262,6 +264,7 @@ const Create = () => {
         setImage1("");
         setImage2("");
         setImage3("");
+
       } catch (error) {
         console.log(error);
         setError(true);
@@ -277,16 +280,6 @@ const Create = () => {
     <div>
       <div className="row justify-content-center mt-5 mb-5">
         <div className="col-md-5 mt-5">
-          {success && (
-            <div className=" alert alert-success" role="alert">
-              Listing Created Successfully
-            </div>
-          )}
-          {incomplete && (
-            <div className=" alert alert-danger" role="alert">
-              Please Ensure All Fields Have Been Filled
-            </div>
-          )}
 
           <div className="bs">
             <h1>Create Listing</h1>
@@ -464,13 +457,23 @@ const Create = () => {
                 className="btn btn-primary"
                 onClick={create}
               >
-                Register
+                Create Listing
               </button>
             </form>
             <button className="btn btn-primary" onClick={clearFields}>
               Reset Fields
             </button>
           </div>
+          {success && (
+            <div className=" alert alert-success" role="alert">
+              Listing Created Successfully
+            </div>
+          )}
+          {incomplete && (
+            <div className=" alert alert-danger" role="alert">
+              Please Ensure All Fields Have Been Filled
+            </div>
+          )}
         </div>
       </div>
     </div>

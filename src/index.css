@@ -16,6 +16,7 @@ code {
 
 .navbar {
   background-color: rgb(70, 122, 128) !important;
+
 }
 
 .nav-link {
@@ -79,12 +80,12 @@ h1 {
 }
 
 .indivListing {
-  margin-top: 10px !important;
+  margin-top: 80px !important;
   margin-bottom: 5% !important;
 }
 
 .banner {
-  margin-top: 10px !important;
+  margin-top: 80px !important;
   border-radius: 5px !important;
   padding: 20px !important;
 }
