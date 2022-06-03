@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Button, Carousel } from "react-bootstrap";
 
-const BACKEND = "http://localhost:5000";
+const BACKEND = "https://proplister.herokuapp.com";
 
 const ListingIndiv = (listingId) => {
   const [selectedListing, setSelectedListing] = useState([]);
@@ -19,7 +19,7 @@ const ListingIndiv = (listingId) => {
   async function loadListing() {
     try {
       setLoading(true);
-      const listing = await axios(`${BACKEND}/api/listings/listing${id}`);
+      const listing = await axios(`${BACKEND}/api/listings/listing/${id}`);
       setSelectedListing(listing.data);
       console.log("selected", selectedListing);
     } catch (e) {

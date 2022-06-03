@@ -8,6 +8,7 @@ import ListingIndiv from './screens/Listingscreen';
 import Createscreen from './screens/Createscreen';
 import Dashboard from './screens/Dashboard';
 import Edit from './screens/Edit';
+import Welcomescreen from './screens/Welcomescreen';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Navbar />
       <BrowserRouter>
         <Routes>
+        <Route path='' element={<Welcomescreen />}/>
           <Route path='listings' element={<Homescreen />}/>
           <Route path='dashboard' element={<Dashboard />}/>
 
